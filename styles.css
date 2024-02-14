@@ -81,3 +81,9 @@ body {
   transition: all 0.5s ease;
   z-index: 2;
 }
+
+h1 {
+    text-align: center; /* Center-align the text */
+    color: red; /* Change the color to blue (you can replace 'blue' with any color value) */
+    font-size: 36px; /* Increase the font size to 36 pixels (you can adjust the size as needed) */
+}
