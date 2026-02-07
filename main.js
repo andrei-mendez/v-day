@@ -9,18 +9,18 @@ function getRandomNumber(min, max) {
 }
 
 btnNo.addEventListener("mouseover", () => {
-  const containerRect = container.getBoundingClientRect();
+  const parentRect = btnNo.parentElement.getBoundingClientRect();
   const btnRect = btnNo.getBoundingClientRect();
 
-  const maxX = containerRect.width - btnRect.width;
-  const maxY = 80;
+  const maxX = parentRect.width - btnRect.width;
+  const maxY = 60;
 
-  const randomX = getRandomNumber(0, maxX);
-  const randomY = getRandomNumber(0, maxY);
+  const randomX = getRandomNumber(-maxX / 2, maxX / 2);
+  const randomY = getRandomNumber(-maxY, maxY);
 
-  btnNo.style.left = `${randomX}px`;
-  btnNo.style.top = `${randomY}px`;
+  btnNo.style.transform = `translate(${randomX}px, ${randomY}px)`;
 });
+
 
 btnYes.addEventListener("click", () => {
   btnNo.classList.add("hide");
