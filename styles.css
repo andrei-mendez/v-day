@@ -4,87 +4,109 @@
   box-sizing: border-box;
 }
 
-.hide {
-  display: none;
-}
-
 body {
-  padding: 2rem;
-  width: 100%;
   min-height: 100vh;
-  background-image: linear-gradient(to right bottom, #cffafe, #22d3ee);
+  padding: env(safe-area-inset-top) 1rem env(safe-area-inset-bottom);
   display: flex;
   flex-direction: column;
+  background: linear-gradient(270deg, #cffafe, #fbcfe8);
+  background-size: 400% 400%;
+  animation: gradientShift 10s ease infinite;
 }
 
-.header-img {
-  display: flex;
-  width: 100%;
-  max-width: 600px;
-  margin-inline: auto;
-  filter: drop-shadow(5px 5px 20px rgba(0, 0, 0, 0.2));
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+h1 {
+  text-align: center;
+  color: #dc2626;
+  font-size: clamp(2rem, 6vw, 4.5rem);
+  font-family: "Lobster", cursive;
+  margin: 1rem 0;
 }
 
 .container {
   flex: 1;
   position: relative;
-  isolation: isolate;
   width: 100%;
-  max-width: 1200px;
-  margin-inline: auto;
+  max-width: 420px;
+  margin: 0 auto;
 }
 
 .image-1,
 .image-2 {
   position: absolute;
-  top: 50%;
+  top: 45%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
 
 .image-1 {
-  width: 175px;
+  width: 170px;
 }
 
 .image-2 {
-  width: 250px;
+  width: 240px;
+  animation: fadeIn 0.6s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -45%);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+}
+
+.hide {
+  display: none;
 }
 
 .btn {
   position: absolute;
-  top: calc(100% - 5rem);
-  min-width: 120px;
+  bottom: 2rem;
+  min-width: 140px;
+  min-height: 48px;
   padding: 0.75rem 1rem;
-  font-size: 1.25rem;
-  outline: none;
+  font-size: 1.2rem;
+  border-radius: 12px;
   border: none;
-  background-color: #f8fafc;
-  border-radius: 5px;
-  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);
   cursor: pointer;
-  transition: 0.3s;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease;
 }
 
 .btn:hover {
-  background-color: #e2e8f0;
-  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+  transform: scale(1.05);
 }
 
 .btn-yes {
   left: 50%;
   transform: translateX(calc(-100% - 1rem));
+  background-color: #fb7185;
+  color: white;
   z-index: 1;
+}
+
+.btn-yes:hover {
+  background-color: #f43f5e;
 }
 
 .btn-no {
   left: calc(50% + 1rem);
-  transition: all 0.5s ease;
+  background-color: #f8fafc;
   z-index: 2;
-}
-
-h1 {
-    text-align: center; /* Center-align the text */
-    color: red; /* Change the color to blue (you can replace 'blue' with any color value) */
-    font-size: 84px; /* Increase the font size to 36 pixels (you can adjust the size as needed) */
-    font-family: 'Lobster', cursive; /* Use Lobster font */
+  transition: all 0.5s ease;
 }
