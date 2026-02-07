@@ -8,36 +8,22 @@ function getRandomNumber(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-// Make the "No" button dodge the cursor
 btnNo.addEventListener("mouseover", () => {
   const containerRect = container.getBoundingClientRect();
   const btnRect = btnNo.getBoundingClientRect();
 
-  const maxTop = containerRect.height - btnRect.height;
-  const maxLeft = containerRect.width - btnRect.width;
+  const maxX = containerRect.width - btnRect.width;
+  const maxY = 80;
 
-  let newTop, newLeft;
+  const randomX = getRandomNumber(0, maxX);
+  const randomY = getRandomNumber(0, maxY);
 
-  do {
-    newTop = getRandomNumber(0, maxTop);
-  } while (Math.abs(newTop - btnNo.offsetTop) < containerRect.height / 3);
-
-  do {
-    newLeft = getRandomNumber(0, maxLeft);
-  } while (Math.abs(newLeft - btnNo.offsetLeft) < containerRect.width / 3);
-
-  btnNo.style.top = `${newTop}px`;
-  btnNo.style.left = `${newLeft}px`;
+  btnNo.style.left = `${randomX}px`;
+  btnNo.style.top = `${randomY}px`;
 });
 
-// Handle "Yes" click
 btnYes.addEventListener("click", () => {
   btnNo.classList.add("hide");
   imageOne.classList.add("hide");
   imageTwo.classList.remove("hide");
-
-  // Small vibration on mobile
-  if (navigator.vibrate) {
-    navigator.vibrate(50);
-  }
 });
