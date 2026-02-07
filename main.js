@@ -5,36 +5,39 @@ const btnYes = document.querySelector(".btn-yes");
 const btnNo = document.querySelector(".btn-no");
 
 function getRandomNumber(min, max) {
-  // Calculate the random number between min and max (inclusive)
-  const randomNumber = Math.floor(Math.random() * (max - min + 1)) + min;
-
-  return randomNumber;
+  return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-btnNo.addEventListener("mouseover", (event) => {
-  const containerHeight = container.getBoundingClientRect().height;
-  const containerWidth = container.getBoundingClientRect().width;
-  const btnHeight = btnNo.getBoundingClientRect().height;
-  const btnWidth = btnNo.getBoundingClientRect().width;
-  const btnTop = btnNo.getBoundingClientRect().top;
-  const btnLeft = btnNo.getBoundingClientRect().left;
+// Make the "No" button dodge the cursor
+btnNo.addEventListener("mouseover", () => {
+  const containerRect = container.getBoundingClientRect();
+  const btnRect = btnNo.getBoundingClientRect();
 
-  let newTop = btnTop;
-  let newLeft = btnLeft;
-  while (Math.abs(newTop - btnTop) < containerHeight / 3) {
-    newTop = getRandomNumber(0, containerHeight - btnHeight);
-  }
+  const maxTop = containerRect.height - btnRect.height;
+  const maxLeft = containerRect.width - btnRect.width;
 
-  while (Math.abs(newLeft - btnLeft) < containerWidth / 3) {
-    newLeft = getRandomNumber(0, containerWidth - btnWidth);
-  }
+  let newTop, newLeft;
 
-  btnNo.style.top = Math.floor(newTop) + "px";
-  btnNo.style.left = Math.floor(newLeft) + "px";
+  do {
+    newTop = getRandomNumber(0, maxTop);
+  } while (Math.abs(newTop - btnNo.offsetTop) < containerRect.height / 3);
+
+  do {
+    newLeft = getRandomNumber(0, maxLeft);
+  } while (Math.abs(newLeft - btnNo.offsetLeft) < containerRect.width / 3);
+
+  btnNo.style.top = `${newTop}px`;
+  btnNo.style.left = `${newLeft}px`;
 });
 
-btnYes.addEventListener("click", (e) => {
+// Handle "Yes" click
+btnYes.addEventListener("click", () => {
   btnNo.classList.add("hide");
   imageOne.classList.add("hide");
   imageTwo.classList.remove("hide");
+
+  // Small vibration on mobile
+  if (navigator.vibrate) {
+    navigator.vibrate(50);
+  }
 });
