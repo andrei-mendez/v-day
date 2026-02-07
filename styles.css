@@ -76,10 +76,12 @@ h1 {
 /* Buttons */
 .button-row {
   width: 100%;
+  max-width: 320px;
   display: flex;
   justify-content: center;
-  gap: 1rem;
+  gap: 1.2rem;
   position: relative;
+  margin-inline: auto;
 }
 
 .btn {
@@ -105,8 +107,7 @@ h1 {
 }
 
 .btn-no {
-  position: absolute;
-  left: calc(50% + 80px);
+  position: relative;
 }
 
 /* Mobile fixes */
